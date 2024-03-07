@@ -15,8 +15,7 @@ services:
   target100-backend:
     # image: transvisionsolutions/transvision-data-manager:1.0.0.42
 
-    context: ../RankingSystem
-    dockerfile: Dockerfile
+    dockerfile: ../RankingSystem/Dockerfile
     
     env_file:
       - ./.env
