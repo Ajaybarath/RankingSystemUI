@@ -1,23 +1,61 @@
-# Use an official Node runtime as the base image
-FROM node:14-alpine
+# # Use an official Node runtime as the base image
+# FROM node:14-alpine
 
-# Set the working directory in the container
-WORKDIR /app
+# # Set the working directory in the container
+# WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# # Copy package.json and package-lock.json to the working directory
+# COPY package*.json ./
+
+# # Install dependencies
+# RUN npm install
+
+# # Copy the entire project to the working directory
+# COPY . .
+
+# # Build the React app
+# RUN npm run build
+
+# # Expose the port the app runs on
+# EXPOSE 80
+
+# # Define the command to run the app
+# CMD ["npm", "start"]
+
+
+# Base Image
+FROM node:18 as builder
+
+# Set Working Directory
+WORKDIR /
+
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the entire project to the working directory
+# Copy all files
 COPY . .
 
-# Build the React app
+# ENV REACT_APP_BASE_URL_CO_ENGINE=http://54.84.192.90:8081
+# ENV REACT_APP_BASE_URL_DATA_MANAGER=http://54.84.192.90:8080
+ENV REACT_APP_BASE_URL_CO_ENGINE=http://localhost:8081
+ENV REACT_APP_BASE_URL_DATA_MANAGER=http:/localhost:8080
+
+# Build the app
 RUN npm run build
 
-# Expose the port the app runs on
+
+# Stage 2
+
+# Base Image
+FROM nginx:1.21.1-alpine
+
+# Copy the build output to replace the default nginx contents.
+COPY --from=builder /build /usr/share/nginx/html/target100
+
+# Expose port 80
 EXPOSE 80
 
-# Define the command to run the app
-CMD ["npm", "start"]
+CMD ["nginx", "-g", "daemon off;"]
