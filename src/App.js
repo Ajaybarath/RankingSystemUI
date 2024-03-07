@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Home';
+import ExamResult from './ExamResult';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  // const router =
+  //   createBrowserRouter(
+  //     // use "/" as start for absolute path and "" for relative path to the route, i.e : "/transvision/new-request" is an absolute path where as enter-entiy-details is relative to "/transvision/new-request"
+  //     createRoutesFromElements(
+  //       <>
+  //         {/* <Route path="/" element={<Home />} /> */}
+  //         <Route path="/" element={<Home />} />
+  //       </>))
+  // <div className='App' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+  //   {/* <ExamResult /> */}
+  //   <Home />
+  // </div>
+  // <Routes>
+  //   <Route path="/" element={<Home />} />
+  //   <Route path="/examResult" element={<ExamResult />} />
+  // </Routes>
+
+  // const router = createBrowserRouter([
+  //   {
+  //     path: "/",
+  //     element: <Home />
+  //   },
+  // ]);
+
+  // return <RouterProvider router={router} />
+
+  return (<Router>
+    <Routes>
+      <Route path="" element={<Home />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/examResult" element={<ExamResult />} />
+    </Routes>
+  </Router>)
+};
 
 export default App;

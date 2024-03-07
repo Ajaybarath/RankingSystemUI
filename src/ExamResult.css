@@ -1,0 +1,180 @@
+.exam-page {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    width: 70%;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.exam-info {
+    margin-bottom: 20px;
+}
+
+.exam-info div {
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+tr {
+    border: #0069d9;
+}
+
+th {
+    width: 30%;
+    background-color: #e7e7e7;
+}
+
+tr:nth-child(even) {
+    background-color: #523c3c;
+    /* Change to your desired background color */
+}
+
+.tableData {
+    width: 70%;
+    padding: 10px;
+    background-color: #e7e7e7;
+}
+
+.markTableContainer,
+.markTable {
+    width: 100%;
+}
+
+.markHead {
+    padding: 20px;
+    height: 40px;
+}
+
+tr {
+    border: #0069d9;
+}
+
+.markHead tr th {
+    width: 0px;
+    background-color: #e7e7e7;
+}
+
+.markRow td {
+    padding: 10px;
+    background-color: #e7e7e7;
+}
+
+.markTotalRow td {
+    padding: 10px;
+    background-color: #595959;
+    font-weight: 800;
+    color: #fff;
+}
+
+.rankHeading {
+    width: 100%;
+    background-color: #0069d9;
+}
+
+.rankText {
+    color: #fff;
+    font-weight: 500;
+    padding: 10px;
+    font-size: 26px;
+}
+
+.rankContainer {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.rankContainerRow {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    height: 120px;
+    background-color: #eeeaea;
+    padding: 10px;
+    align-items: center;
+}
+
+
+.rankCard {
+    height: 90px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    justify-content: space-evenly;
+    box-shadow: #353535;
+    border-radius: 10px;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    /* Horizontal offset, Vertical offset, Blur radius, Spread radius, Color */
+
+}
+
+.rankTitle {
+    font-size: 20px;
+    color: #353535;
+    margin: 0px;
+    font-weight: 400;
+}
+
+.rankScore {
+    font-size: 30px;
+    color: #353535;
+    margin: 0px;
+    font-weight: 500;
+
+}
+
+@media only screen and (max-width: 1000px) {
+    .rankContainer {
+       
+    }
+
+    .rankContainerRow {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
+        height: 120px;
+        background-color: #eeeaea;
+        padding: 10px;
+        align-items: center;
+        flex-direction: column;
+        margin: 10px;
+        height: auto; /* Adjust height as needed */
+    }
+
+    .rankCard{
+        margin: 10px;
+    }
+
+    .markTableContainer, th, .tableData {
+        font-size: 13px;
+    }
+
+    .rankText, .rankTitle {
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 25px
+    }
+
+    .exam-page {
+        width: 90%;
+    }
+}
+
+
+
+.mandatory {
+    color: red;
+}

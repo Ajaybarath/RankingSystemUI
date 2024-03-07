@@ -1,0 +1,50 @@
+.form-page {
+    display: flex;
+    height: auto;
+    padding: 30px 15px;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+}
+
+.input1 {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-top: 10px;
+}
+
+input{
+    margin-top: 5px;
+    height: 25px;
+}
+
+select {
+    margin-top: 5px;
+    height: 30px;
+}
+
+
+
+
+.form-container {
+    background-color: #ccc;
+    border-radius: 8px;
+    width: 80%;
+    padding: 30px 15px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    margin-top: 20px;
+    background-color: #008CBA;
+    border-radius: 0.25rem;
+    width: 100px;
+    height: 40px;
+    color: #ccc;
+    font-weight: 600;
+    border: none;
+}
