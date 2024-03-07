@@ -52,8 +52,8 @@ services:
       - REACT_APP_API_URL=http://43.204.228.132:8080
     networks:
       - springmysql-net
-    depends_on:
-      - target100-backend
+    # depends_on:
+    #   - target100-backend
 
 networks:
   springmysql-net:
