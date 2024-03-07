@@ -27,7 +27,7 @@
 FROM node:18 as builder
 
 # Set Working Directory
-WORKDIR /
+WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
@@ -42,6 +42,8 @@ COPY . .
 # ENV REACT_APP_BASE_URL_DATA_MANAGER=http://54.84.192.90:8080
 ENV REACT_APP_BASE_URL_CO_ENGINE=http://localhost:8081
 ENV REACT_APP_BASE_URL_DATA_MANAGER=http:/localhost:8080
+ENV REACT_APP_API_URL=http://localhost:8080
+
 
 # Build the app
 RUN npm run build
@@ -50,12 +52,12 @@ RUN npm run build
 # Stage 2
 
 # Base Image
-FROM nginx:1.21.1-alpine
+FROM nginx
 
 # Copy the build output to replace the default nginx contents.
-COPY --from=builder /build /usr/share/nginx/html/target100
+COPY --from=builder /app/build /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]

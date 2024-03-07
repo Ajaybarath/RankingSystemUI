@@ -12,7 +12,8 @@ services:
   #   environment:
   #     - MYSQL_ROOT_PASSWORD=${MYSQLDB_ROOT_PASSWORD}
   #     - MYSQL_DATABASE=${MYSQLDB_DATABASE}
-  # RankingSystem:
+
+  # target100-backend:
   #   # image: transvisionsolutions/transvision-data-manager:1.0.0.42
 
   #   context: ../RankingSystem
