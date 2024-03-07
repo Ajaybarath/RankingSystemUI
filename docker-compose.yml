@@ -1,42 +1,42 @@
 version: '3'
 services:
 
-  # mysqldb:
-  #   image: mysql:8.1
-  #   env_file:
-  #     - ./.env
-  #   ports:
-  #     - "${MYSQL_LOCAL_PORT}:${MYSQL_DOCKER_PORT}"
-  #   networks:
-  #     - springmysql-net
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=${MYSQLDB_ROOT_PASSWORD}
-  #     - MYSQL_DATABASE=${MYSQLDB_DATABASE}
+  mysqldb:
+    image: mysql:8.1
+    env_file:
+      - ./.env
+    ports:
+      - "${MYSQL_LOCAL_PORT}:${MYSQL_DOCKER_PORT}"
+    networks:
+      - springmysql-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQLDB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQLDB_DATABASE}
 
-  # target100-backend:
-  #   # image: transvisionsolutions/transvision-data-manager:1.0.0.42
-
-  #   context: ../RankingSystem
-  #   dockerfile: Dockerfile
+  target100-backend:
+    # image: transvisionsolutions/transvision-data-manager:1.0.0.42
+    build: 
+      context: ../RankingSystem
+      dockerfile: Dockerfile
     
-  #   env_file:
-  #     - ./.env
-  #   extra_hosts:
-  #     - "host.docker.internal:host-gateway"
-  #   ports:
-  #     - "${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}"
-  #   environment:
-  #     - spring.datasource.url=jdbc:mysql://mysqldb:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}
-  #     - spring.datasource.username=root
-  #     - spring.datasource.password=${MYSQLDB_ROOT_PASSWORD}
-  #     - spring.jpa.hibernate.ddl-auto=update
-  #     - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-  #     - spring.jpa.show-sql:true
+    env_file:
+      - ./.env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}"
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:${MYSQLDB_DOCKER_PORT}/${MYSQLDB_DATABASE}
+      - spring.datasource.username=root
+      - spring.datasource.password=${MYSQLDB_ROOT_PASSWORD}
+      - spring.jpa.hibernate.ddl-auto=update
+      - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+      - spring.jpa.show-sql:true
       
-  #   networks:
-  #     - springmysql-net
-  #   depends_on:
-  #     - mysqldb
+    networks:
+      - springmysql-net
+    depends_on:
+      - mysqldb
 
   ranking-system-ui:
     # image: transvisionsolutions/transvision-ui-portal:1.0.0.347
@@ -53,8 +53,8 @@ services:
       - REACT_APP_API_URL=http://43.204.228.132:8080
     networks:
       - springmysql-net
-    # depends_on:
-    #   - target100-backend
+    depends_on:
+      - target100-backend
 
 networks:
   springmysql-net:
