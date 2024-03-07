@@ -37,7 +37,7 @@ services:
   #   depends_on:
   #     - mysqldb
 
-  RankingSystemUI:
+  ranking-system-ui:
     # image: transvisionsolutions/transvision-ui-portal:1.0.0.347
     build:
       context: .
