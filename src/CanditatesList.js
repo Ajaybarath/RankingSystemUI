@@ -23,6 +23,7 @@ const CanditateList = () => {
             setData(response.data.result.data);
             setTotal(response.data.result.totalPages);
             console.log(pagination.current);
+            console.log(pagination.total);
 
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -88,10 +89,10 @@ const CanditateList = () => {
                 columns={columns} dataSource={data}
                 pagination={pagination}
                 onRow={(record) => ({ onClick: () => handleRowClick(record) })}
-                onChange={(pagination) => {
-                    console.log(pagination.current);
-                    return setPage(pagination.current)
-                }}
+                // onChange={(pagination) => {
+                //     console.log(pagination.current);
+                //     return setPage(pagination.current)
+                // }}
                 rowKey='rollNumber' />
         </div>
     );
