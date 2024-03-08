@@ -22,7 +22,6 @@
 # # Define the command to run the app
 # CMD ["npm", "start"]
 
-
 # Base Image
 FROM node:18 as builder
 
@@ -40,15 +39,18 @@ COPY . .
 
 ENV REACT_APP_API_URL=http://3.111.39.24:8080
 
-
 # Build the app
 RUN npm run build
 
-
 # Stage 2
-
 # Base Image
 FROM nginx
+
+# Remove default nginx configurations
+RUN rm -rf /etc/nginx/conf.d/*
+
+# Copy custom nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the build output to replace the default nginx contents.
 COPY --from=builder /app/build /usr/share/nginx/html
