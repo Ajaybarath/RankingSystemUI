@@ -28,8 +28,10 @@ const ExamResult = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-
-                const response1 = await axios.post(`${apiUrl}:8080/api/v1/candidate/scrape?url=${value1}&category=${value2}&state=${value3}&gender=${value4}`);
+                console.log("starting the url");
+                const url = `${apiUrl}/api/v1/candidate/scrape?url=${value1}&category=${value2}&state=${value3}&gender=${value4}`;
+                console.log(url);
+                const response1 = await axios.post(url);
 
                 setResult1(response1.data);
                 setRollNum(response1.data.result.rollNumber);
@@ -45,16 +47,16 @@ const ExamResult = () => {
 
         const fetchRankData = async () => {
             try {
-                
+
                 if (rollNum) {
-                    const response2 = await axios.get(`${apiUrl}:8080/api/v1/candidate/rank`, {
+                    const response2 = await axios.get(`${apiUrl}/api/v1/candidate/rank`, {
                         params: {
                             rollNum: rollNum
                         }
                     });
                     setResult2(response2.data);
 
-                    const response3 = await axios.get(`${apiUrl}:8080/api/v1/candidate/rankByCategory`, {
+                    const response3 = await axios.get(`${apiUrl}/api/v1/candidate/rankByCategory`, {
                         params: {
                             rollNum: rollNum,
                             category: value2
@@ -62,7 +64,7 @@ const ExamResult = () => {
                     });
                     setResult3(response3.data);
 
-                    const response4 = await axios.get(`${apiUrl}:8080/api/v1/candidate/rankByGender`, {
+                    const response4 = await axios.get(`${apiUrl}/api/v1/candidate/rankByGender`, {
                         params: {
                             rollNum: rollNum,
                             gender: value4
@@ -70,14 +72,15 @@ const ExamResult = () => {
                     });
                     setResult4(response4.data);
 
-                    const response5 = await axios.get(`${apiUrl}:8080/api/v1/candidate`, {
+                    const response5 = await axios.get(`${apiUrl}/api/v1/candidate`, {
                         params: {
                             rollNum: rollNum
                         }
                     });
                     setResult5(response5.data);
+                    setLoading(false);
                 }
-                setLoading(false);
+
             } catch (error) {
                 console.error('Error fetching rank data:', error);
             }
@@ -89,11 +92,11 @@ const ExamResult = () => {
 
 
     return (
-        <div className="exam-page">
+        <div>
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                <>
+                <div className="exam-page">
                     <h1>{result1 && result1.result && result1.result.subject}</h1>
                     <div className="exam-info">
                         <table>
@@ -203,8 +206,9 @@ const ExamResult = () => {
                             </tbody>
                         </table>
                     </div>
-                </>)}
-        </div>
+                </div>
+            )}
+        </div >
     );
 }
 
