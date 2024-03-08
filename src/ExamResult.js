@@ -23,6 +23,8 @@ const ExamResult = () => {
     const [result4, setResult4] = useState('');
     const [result5, setResult5] = useState('');
 
+    const [refreshed, setRefreshed] = useState(false);
+
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
@@ -30,9 +32,7 @@ const ExamResult = () => {
         const isPageRefreshed = window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD;
 
         // If the page is refreshed, redirect to login page
-        if (isPageRefreshed) {
-            navigate('/');
-        }
+       
     }, []);
 
 
@@ -52,7 +52,7 @@ const ExamResult = () => {
         };
 
         fetchData();
-    }, []);
+    }, [value1, value2, value3, value4]);
 
     useEffect(() => {
 
@@ -101,10 +101,8 @@ const ExamResult = () => {
 
     }, [result1]);
 
-    if (value1 === null) {
-        // If not authenticated, redirect to login page
+    if (refreshed) {
         navigate('/');
-        return null;
     }
 
     return (
