@@ -33,6 +33,7 @@ services:
       - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
       - spring.jpa.show-sql:true
       - spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServerDialect
+      - server.ui.url=http://3.111.39.24:80
       
     networks:
       - springmysql-net
