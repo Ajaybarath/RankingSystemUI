@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import ExamResult from './ExamResult';
+import NotFound from './NotFound';
 
 const App = () => {
   // const router =
@@ -35,6 +36,7 @@ const App = () => {
       <Route path="" element={<Home />} />
       <Route path="/" element={<Home />} />
       <Route path="/examResult" element={<ExamResult />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   </Router>)
 };
