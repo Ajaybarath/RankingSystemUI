@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const CanditateList = () => {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
-    const [total, setTotal] = useState(0);
+    const [total, setTotal] = useState(null);
 
     const navigate = useNavigate();
 
@@ -17,13 +17,15 @@ const CanditateList = () => {
 
     const fetchData = async () => {
         try {
-            const url = `${apiUrl}/api/v1/candidate?page=${(page - 1)}&&size=10`;
+            const url = `${apiUrl}/api/v1/candidate?page=${(page - 1)}&&size=1`;
             const response = await axios.get(url);
             console.log(response.data.result.data);
             setData(response.data.result.data);
             setTotal(response.data.result.totalPages);
             console.log(pagination.current);
             console.log(pagination.total);
+            console.log(total);
+            console.log(response.data.result.totalPages);
 
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -69,7 +71,7 @@ const CanditateList = () => {
 
     const pagination = {
         total: total,
-        pageSize: 10,
+        pageSize: 1,
         current: page,
         onChange: (page) => setPage(page),
     };
@@ -85,15 +87,18 @@ const CanditateList = () => {
 
     return (
         <div>
-            <Table className='antTable'
-                columns={columns} dataSource={data}
-                pagination={pagination}
-                onRow={(record) => ({ onClick: () => handleRowClick(record) })}
-                // onChange={(pagination) => {
-                //     console.log(pagination.current);
-                //     return setPage(pagination.current)
-                // }}
-                rowKey='rollNumber' />
+           {total !==null &&
+            ( <Table className='antTable'
+            columns={columns} dataSource={data}
+            pagination={pagination}
+            onRow={(record) => ({ onClick: () => handleRowClick(record) })}
+            // onChange={(pagination) => {
+            //     console.log(pagination.current);
+            //     return setPage(pagination.current)
+            // }}
+            rowKey='rollNumber' />)
+           }
+           
         </div>
     );
 };
