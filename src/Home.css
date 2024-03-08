@@ -3,7 +3,7 @@
     height: auto;
     padding: 30px 15px;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
     align-items: center;
 }
 
@@ -30,7 +30,7 @@ select {
 .form-container {
     background-color: #ccc;
     border-radius: 8px;
-    width: 80%;
+    width: 40%;
     padding: 30px 15px;
     align-items: center;
     justify-content: center;
@@ -40,11 +40,18 @@ select {
 
 button {
     margin-top: 20px;
-    background-color: #008CBA;
+    background-color: #389dbf;
     border-radius: 0.25rem;
     width: 100px;
     height: 40px;
-    color: #ccc;
+    color: #fff;
     font-weight: 600;
     border: none;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .form-container {
+        width: 80%;
+    }
 }
