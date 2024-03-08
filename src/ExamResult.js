@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './ExamResult.css';
+import { FaTelegramPlane } from 'react-icons/fa';
 
 
 const ExamResult = () => {
@@ -32,7 +33,7 @@ const ExamResult = () => {
         const isPageRefreshed = window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD;
 
         // If the page is refreshed, redirect to login page
-       
+
     }, []);
 
 
@@ -145,7 +146,7 @@ const ExamResult = () => {
 
                     <div className='rankHeading'>
                         <p className='rankText'>
-                            Your Rank Among All Karnataka Candidates
+                            Your Rank Among Karnataka Candidates
                         </p>
                     </div>
 
@@ -222,6 +223,12 @@ const ExamResult = () => {
                     </div>
                 </div>
             )}
+            <footer>
+                <p>Follow us on Telegram:</p>
+                <a href="https://t.me/the_target100" target="_blank" rel="noopener noreferrer">
+                    <FaTelegramPlane />  THE TARGET 100 (SSC in KANNADA)
+                </a>
+            </footer>
         </div >
     );
 }

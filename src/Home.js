@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
+import { FaTelegramPlane } from 'react-icons/fa';
 
 
 export default function Home() {
@@ -89,6 +90,13 @@ export default function Home() {
                 </div>
                 <button type="submit">Submit</button>
             </form>
+
+            <footer>
+                <p>Follow us on Telegram:</p>
+                <a href="https://t.me/the_target100" target="_blank" rel="noopener noreferrer">
+                    <FaTelegramPlane />  THE TARGET 100 (SSC in KANNADA)
+                </a>
+            </footer>
         </div>
     );
 
