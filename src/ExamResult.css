@@ -31,7 +31,7 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: #523c3c;
+    background-color: #dbd7d7;
     /* Change to your desired background color */
 }
 

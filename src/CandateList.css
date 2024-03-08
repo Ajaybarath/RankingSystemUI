@@ -1,0 +1,26 @@
+.antTable {
+    width: 100%;
+}
+
+.antTable th {
+    text-align: left;
+    padding: 8px;
+    width: 0%;
+}
+
+.antTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Adjust the table layout for smaller screens */
+@media screen and (max-width: 600px) {
+
+    .antTable th,
+    .antTable td {
+        padding: 4px;
+    }
+}
+
+.ant-table-row-clicked {
+    background-color: #c72020; /* Change to any color you prefer */
+  }

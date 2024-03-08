@@ -14,6 +14,7 @@ const ExamResult = () => {
     const value2 = searchParams.get('category');
     const value3 = searchParams.get('state');
     const value4 = searchParams.get('gender');
+    const value5 = searchParams.get('rollNum');
     const [loading, setLoading] = useState(true);
 
 
@@ -41,12 +42,24 @@ const ExamResult = () => {
         const fetchData = async () => {
             try {
                 console.log("starting the url");
-                const url = `${apiUrl}/api/v1/candidate/scrape?url=${value1}&category=${value2}&state=${value3}&gender=${value4}`;
-                console.log(url);
-                const response1 = await axios.post(url);
+                if (value5) {
+                    const url = `${apiUrl}/api/v1/candidate/?rollNum=${value5}`;
+                    console.log(url);
+                    const response1 = await axios.get(url);
 
-                setResult1(response1.data);
-                setRollNum(response1.data.result.rollNumber);
+                    setResult1(response1.data);
+                    setRollNum(response1.data.result.rollNumber);
+                    value2 = response1.data.result.category;
+                    
+                } else {
+                    const url = `${apiUrl}/api/v1/candidate/scrape?url=${value1}&category=${value2}&state=${value3}&gender=${value4}`;
+                    console.log(url);
+                    const response1 = await axios.post(url);
+
+                    setResult1(response1.data);
+                    setRollNum(response1.data.result.rollNumber);
+                }
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -67,7 +80,7 @@ const ExamResult = () => {
                         }
                     });
                     setResult2(response2.data);
-
+                    
                     const response3 = await axios.get(`${apiUrl}/api/v1/candidate/rankByCategory`, {
                         params: {
                             rollNum: rollNum,
