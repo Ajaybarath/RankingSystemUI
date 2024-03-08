@@ -17,7 +17,7 @@ const CanditateList = () => {
 
     const fetchData = async () => {
         try {
-            const url = `${apiUrl}/api/v1/candidate?page=${(page - 1)}&&size=1`;
+            const url = `${apiUrl}/api/v1/candidate?page=${(page - 1)}&&size=10`;
             const response = await axios.get(url);
             console.log(response.data.result.data);
             setData(response.data.result.data);
@@ -71,7 +71,7 @@ const CanditateList = () => {
 
     const pagination = {
         total: total,
-        pageSize: 1,
+        pageSize: 10,
         current: page,
         onChange: (page) => setPage(page),
     };
