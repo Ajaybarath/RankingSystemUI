@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './ExamResult.css';
 
 
 const ExamResult = () => {
 
     const location = useLocation();
+    const navigate = useNavigate();
     const searchParams = new URLSearchParams(location.search);
     const value1 = searchParams.get('url');
     const value2 = searchParams.get('category');
@@ -24,9 +25,18 @@ const ExamResult = () => {
 
     const apiUrl = process.env.REACT_APP_API_URL;
 
+    useEffect(() => {
+        // Check if the page is refreshed
+        const isPageRefreshed = window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD;
+
+        // If the page is refreshed, redirect to login page
+        if (isPageRefreshed) {
+            navigate('/');
+        }
+    }, []);
+
 
     useEffect((event) => {
-        event.preventDefault();
         const fetchData = async () => {
             try {
                 console.log("starting the url");
@@ -91,6 +101,11 @@ const ExamResult = () => {
 
     }, [result1]);
 
+    if (value1 === null) {
+        // If not authenticated, redirect to login page
+        navigate('/');
+        return null;
+    }
 
     return (
         <div>
