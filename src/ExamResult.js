@@ -25,7 +25,8 @@ const ExamResult = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
 
 
-    useEffect(() => {
+    useEffect((event) => {
+        event.preventDefault();
         const fetchData = async () => {
             try {
                 console.log("starting the url");
