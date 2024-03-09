@@ -34,7 +34,7 @@ services:
       - spring.jpa.show-sql:true
       - spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServerDialect
       - server.ui.url2=http://13.201.167.118
-      - server.ui.url=https://13.201.167.118
+      - server.ui.url=http://13.201.167.118
       - server.ui.url3=https://target100-1862690691.ap-south-1.elb.amazonaws.com
       - server.ui.url4=http://target100-1862690691.ap-south-1.elb.amazonaws.com
       
