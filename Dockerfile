@@ -37,7 +37,7 @@ RUN npm install
 # Copy all files
 COPY . .
 
-ENV REACT_APP_API_URL=https://13.201.167.118:8080
+ENV REACT_APP_API_URL=https://api.thetarget100.com
 
 # Build the app
 RUN npm run build
