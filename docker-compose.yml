@@ -33,8 +33,8 @@ services:
       - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
       - spring.jpa.show-sql:true
       - spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServerDialect
-      - server.ui.url2=http://3.111.39.24:80
-      - server.ui.url=https://3.111.39.24
+      - server.ui.url2=http://13.201.167.118
+      - server.ui.url=https://13.201.167.118
       - server.ui.url3=https://target100-1862690691.ap-south-1.elb.amazonaws.com
       - server.ui.url4=http://target100-1862690691.ap-south-1.elb.amazonaws.com
       
@@ -56,7 +56,7 @@ services:
     ports:
       - "${UI_LOCAL_PORT}:${UI_DOCKER_PORT}"
     environment:
-      - REACT_APP_API_URL=http://3.111.39.24:8080
+      - REACT_APP_API_URL=http://13.201.167.118:8080
     networks:
       - springmysql-net
     depends_on:
