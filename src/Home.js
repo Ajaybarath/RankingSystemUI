@@ -11,11 +11,15 @@ export default function Home() {
     const [state, setState] = useState('');
     const [url, setUrl] = useState('');
     const [gender, setGender] = useState('');
+    const [requiredFields, setRequiredFields] = useState(true);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        navigate(`/examResult?url=${url}&state=${state}&category=${category}&gender=${gender}`);
+        if (category === '' || category === null || state === '' || url === '' || gender === '') {
+            setRequiredFields(false)
+        } else {
+            navigate(`/examResult?url=${url}&state=${state}&category=${category}&gender=${gender}`);
+        }
     };
 
 
@@ -88,6 +92,7 @@ export default function Home() {
                         <option value="Other">Other</option>
                     </select>
                 </div>
+                { !requiredFields ? (<></>) : (<p className='warning'>Fill all the mandatory fields</p>)}
                 <button type="submit">Submit</button>
             </form>
 

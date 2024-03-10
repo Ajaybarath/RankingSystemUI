@@ -1,32 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Table, Button, Space } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import './CandateList.css';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination } from '@mui/material';
+import { PlusOutlined } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
-
-const CanditateList = () => {
+const CandidateList = () => {
     const [data, setData] = useState([]);
-    const [page, setPage] = useState(1);
-    const [total, setTotal] = useState(null);
-
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [total, setTotal] = useState(0); // Initialize total with 0
     const navigate = useNavigate();
 
     const apiUrl = process.env.REACT_APP_API_URL;
 
     const fetchData = async () => {
         try {
-            const url = `${apiUrl}/api/v1/candidate?page=${(page - 1)}&&size=10`;
+            const url = `${apiUrl}/api/v1/candidate?page=${page}&size=${rowsPerPage}`;
             const response = await axios.get(url);
-            console.log(response.data.result.data);
             setData(response.data.result.data);
-            setTotal(response.data.result.totalPages);
-            console.log(pagination.current);
-            console.log(pagination.total);
-            console.log(total);
-            console.log(response.data.result.totalPages);
-
+            setTotal(response.data.result.total); // Set total count of items
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -34,73 +26,61 @@ const CanditateList = () => {
 
     useEffect(() => {
         fetchData();
-    }, [page]);
+    }, [page, rowsPerPage]);
 
-    const columns = [
-        {
-            title: 'ROLL NUM',
-            dataIndex: 'rollNumber',
-            key: 'rollNumber',
-        },
-        {
-            title: 'NAME',
-            dataIndex: 'name',
-            key: 'name',
-        },
-        {
-            title: 'GENDER',
-            dataIndex: 'gender',
-            key: 'gender',
-        },
-        {
-            title: 'CATEGORY',
-            dataIndex: 'category',
-            key: 'category',
-        },
-        {
-            title: 'STATE',
-            dataIndex: 'state',
-            key: 'state',
-        },
-        {
-            title: 'TOTAL MARKS',
-            dataIndex: 'totalMarks',
-            key: 'totalMarks',
-        }
-    ];
-
-    const pagination = {
-        total: total,
-        pageSize: 10,
-        current: page,
-        onChange: (page) => setPage(page),
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
     };
 
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0); // Reset page number when rows per page changes
+    };
 
     const handleRowClick = (record) => {
-        // console.log('Row clicked:', record);
-        // // Add your own logic here
-
+        // Add your logic here
         // navigate(`/examResult?rollNum=${record.rollNumber}`);
-
     };
 
     return (
         <div>
-           {total !==null &&
-            ( <Table className='antTable'
-            columns={columns} dataSource={data}
-            pagination={pagination}
-            onRow={(record) => ({ onClick: () => handleRowClick(record) })}
-            // onChange={(pagination) => {
-            //     console.log(pagination.current);
-            //     return setPage(pagination.current)
-            // }}
-            rowKey='rollNumber' />)
-           }
-           
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>ROLL NUM</TableCell>
+                            <TableCell>NAME</TableCell>
+                            <TableCell>GENDER</TableCell>
+                            <TableCell>CATEGORY</TableCell>
+                            <TableCell>STATE</TableCell>
+                            <TableCell>TOTAL MARKS</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data.map((row) => (
+                            <TableRow key={row.rollNumber} onClick={() => handleRowClick(row)}>
+                                <TableCell>{row.rollNumber}</TableCell>
+                                <TableCell>{row.name}</TableCell>
+                                <TableCell>{row.gender}</TableCell>
+                                <TableCell>{row.category}</TableCell>
+                                <TableCell>{row.state}</TableCell>
+                                <TableCell>{row.totalMarks}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={total} // Set the total count of items
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            />
         </div>
     );
 };
 
-export default CanditateList;
+export default CandidateList;

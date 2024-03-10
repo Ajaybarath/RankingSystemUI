@@ -25,17 +25,7 @@ const ExamResult = () => {
     const [result4, setResult4] = useState('');
     const [result5, setResult5] = useState('');
 
-    const [refreshed, setRefreshed] = useState(false);
-
     const apiUrl = process.env.REACT_APP_API_URL;
-
-    useEffect(() => {
-        // Check if the page is refreshed
-        const isPageRefreshed = window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD;
-
-        // If the page is refreshed, redirect to login page
-
-    }, []);
 
 
     useEffect((event) => {
@@ -80,7 +70,7 @@ const ExamResult = () => {
                         }
                     });
                     setResult2(response2.data);
-                    
+
                     const response3 = await axios.get(`${apiUrl}/api/v1/candidate/rankByCategory`, {
                         params: {
                             rollNum: rollNum,
@@ -114,10 +104,6 @@ const ExamResult = () => {
         fetchRankData();
 
     }, [result1]);
-
-    if (refreshed) {
-        navigate('/');
-    }
 
     return (
         <div>
