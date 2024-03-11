@@ -31,10 +31,10 @@ const ExamResult = () => {
     useEffect((event) => {
         const fetchData = async () => {
             try {
-                console.log("starting the url");
+                // console.log("starting the url");
                 if (value5) {
                     const url = `${apiUrl}/api/v1/candidate/?rollNum=${value5}`;
-                    console.log(url);
+                    // console.log(url);
                     const response1 = await axios.get(url);
 
                     setResult1(response1.data);
@@ -43,7 +43,7 @@ const ExamResult = () => {
                     
                 } else {
                     const url = `${apiUrl}/api/v1/candidate/scrape?url=${value1}&category=${value2}&state=${value3}&gender=${value4}`;
-                    console.log(url);
+                    // console.log(url);
                     const response1 = await axios.post(url);
 
                     setResult1(response1.data);
