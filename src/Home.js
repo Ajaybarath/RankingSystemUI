@@ -12,11 +12,14 @@ export default function Home() {
     const [url, setUrl] = useState('');
     const [gender, setGender] = useState('');
     const [requiredFields, setRequiredFields] = useState(true);
+    const [urlError, setUrlErrorField] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if (category === '' || category === null || state === '' || url === '' || gender === '') {
             setRequiredFields(false)
+        } if (!url.startsWith("https://ssc.digialm.com")) {
+            setUrlErrorField(true)
         } else {
             navigate(`/examResult?url=${url}&state=${state}&category=${category}&gender=${gender}`);
         }
@@ -40,6 +43,7 @@ export default function Home() {
                         }
                         required  // Add the required attribute here
                     />
+                    { !urlError ? (<></>) : (<p className='warning'>Please enter valid url</p>)}
                 </div>
                 <div className='input1'>
                     <label htmlFor="category">Category:<span className="mandatory">*</span></label>
